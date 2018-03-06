@@ -2,7 +2,7 @@
 - hosts: all
 
   vars:
-    ansible_role_cron__jobs:
+    ansible_cron__jobs:
       - { schedule: '0 7 * * *', user: 'nobody', command: '/bin/true' }
 
 
