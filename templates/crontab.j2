@@ -4,6 +4,6 @@
 
 {% if ansible_cron__jobs is defined %}
 {% for job in ansible_cron__jobs %}
-{{ job.schedule }} {{ job.user }} {{ job.command }}
+{{ job }}
 {% endfor %}
 {% endif %}

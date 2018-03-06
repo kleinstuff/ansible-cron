@@ -9,5 +9,5 @@ ansible_cron__head: |
   MAILTO=root
 
 
-#ansible_cron__jobs: |
-#  - { schedule: '0 7 * * *', user: 'nobody', command: '/bin/true' }
+#ansible_cron__jobs:
+#  - '0 7 * * * nobody /bin/true'

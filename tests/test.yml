@@ -3,7 +3,7 @@
 
   vars:
     ansible_cron__jobs:
-      - { schedule: '0 7 * * *', user: 'nobody', command: '/bin/true' }
+      - '0 7 * * * nobody /bin/true'
 
 
   roles:

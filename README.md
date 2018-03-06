@@ -3,7 +3,8 @@
 ansible-cron
 =========
 
-Simple cron control based on jinja template and a for that looks for a dict variable.
+Simple cron control based on jinja template and a for loop that looks for a list variable with all the jobs.
+This role was made to be as simple as possible to migrate crontab files to Ansible.
 
 Requirements
 ------------
@@ -27,8 +28,8 @@ The head of the confile, defaults to:
 The actual jobs, its required and you should use like this:
 ```yaml
 ansible_role_cron__jobs:
-  - { schedule: '0 7 * * *',  user: 'nobody', command: '/bin/true'     }
-  - { schedule: '10 7 * * *', user: 'root',   command: 'sh /script.sh' }
+  - '0 7 * * *  nobody  /bin/true'
+  - '10 7 * * * root    sh /script.sh'
 ```
 
 Dependencies
@@ -44,7 +45,7 @@ Example Playbook
 
   vars:
     ansible_role_cron__jobs:
-      - { schedule: '0 7 * * *', user: 'nobody', command: '/bin/true' }
+      - '0 7 * * * nobody /bin/true'
 
   roles:
     - kleinstuff.ansible-cron
