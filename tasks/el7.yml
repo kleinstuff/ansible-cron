@@ -1,0 +1,16 @@
+---
+
+- name: Install cron
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: no
+  with_items:
+    - crontabs
+    - cronie
+
+- name: Ensure cron is set on boot time (EL7)
+  systemd:
+    name: crond
+    enabled: yes
+    state: started

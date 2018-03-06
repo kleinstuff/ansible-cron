@@ -1,0 +1,13 @@
+---
+# defaults file for cron
+ansible_managed: "ANSIBLE MANAGED"
+
+
+ansible_cron__head: |
+  SHELL=/bin/bash
+  PATH=/sbin:/bin:/usr/sbin:/usr/bin
+  MAILTO=root
+
+
+#ansible_cron__jobs: |
+#  - { schedule: '0 7 * * *', user: 'nobody', command: '/bin/true' }

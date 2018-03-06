@@ -1,0 +1,10 @@
+---
+- hosts: all
+
+  vars:
+    ansible_role_cron__jobs:
+      - { schedule: '0 7 * * *', user: 'nobody', command: '/bin/true' }
+
+
+  roles:
+    - role_under_test

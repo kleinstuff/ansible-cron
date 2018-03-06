@@ -1,0 +1,24 @@
+---
+# tasks file for cron
+
+# Check if we have enough info to work
+- name: vars check
+  fail:
+    msg: "You need to set at least one job in ansible_cron__jobs"
+  when:  ansible_cron__jobs is undefined
+
+# Install and enable cron daemon
+- import_tasks: tasks/el7.yml
+  when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and (ansible_distribution_major_version == '7')
+  #- import_tasks: tasks/el6.yml
+  #  when: (((ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and (ansible_distribution_major_version == '6')) or (ansible_distribution == 'Amazon'))
+
+# Install cron conf file
+- name: Copy crontab file
+  template:
+    src:   crontab.j2
+    dest:  /etc/crontab
+    owner: root
+    group: root
+    mode:  0644
+  notify:  cron-restart

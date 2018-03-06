@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+{{ ansible_cron__head }}
+
+{% if ansible_cron__jobs is defined %}
+{% for job in ansible_cron__jobs %}
+{{ job.schedule }} {{ job.user }} {{ job.command }}
+{% endfor %}
+{% endif %}
