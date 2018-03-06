@@ -1,0 +1,27 @@
+---
+services: docker
+
+env:
+  # Test package install on all supported OSes.
+  - distro: centos7
+    playbook: test.yml
+
+script:
+  # Configure test script so we can run extra tests after playbook is run.
+  - export container_id=$(date +%s)
+  - export cleanup=false
+
+  # Download test shim.
+  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
+  - chmod +x ${PWD}/tests/test.sh
+
+  # Run tests.
+  - ${PWD}/tests/test.sh
+
+  # Check if we have created the dummy job on /etc/crontab.
+  - 'docker exec --tty ${container_id} env TERM=xterm grep nobody /etc/crontab'
+  # Check if there is no syntax errors
+  - 'docker exec --tty ${container_id} env TERM=xterm crontab /etc/crontab'
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
