@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kleinstuff/ansible-cron.png)](https://travis-ci.org/kleinstuff/ansible-cron)
+
 ansible-cron
 =========
 
